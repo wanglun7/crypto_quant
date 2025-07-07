@@ -1,0 +1,5 @@
+pandas>=2
+requests
+pytest
+flake8
+black
