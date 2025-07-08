@@ -1,7 +1,0 @@
-{
-  "status": {"code": 0},
-  "result": [
-    {"timestamp": 1609459200000, "active_addresses": 1000},
-    {"timestamp": 1609545600000, "active_addresses": 1100}
-  ]
-}

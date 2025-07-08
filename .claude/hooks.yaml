@@ -1,0 +1,7 @@
+pre_tool_use:
+  - cmd: "git add -A && git commit -qm 'wip'"        # 自动存快照
+post_tool_use:
+  - cmd: "pytest -q || exit 1"                       # 失败立即让 Claude /fix
+  - cmd: "ruff check --fix ."                        # 格式守门
+post_apply:
+  - cmd: "git commit -m 'auto: apply patch ✅ tests pass'" 

@@ -1,7 +1,0 @@
-{
-  "status": {"code": 0},
-  "result": [
-    {"timestamp": 1609459200000, "netflow_btc": -100},
-    {"timestamp": 1609545600000, "netflow_btc": 50}
-  ]
-}
