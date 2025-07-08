@@ -1,0 +1,651 @@
+{
+  "initial_capital": 50000.0,
+  "final_value": 50000.0,
+  "total_return": 0.0,
+  "annualized_return": 0.0,
+  "volatility": 0.0,
+  "sharpe_ratio": 0,
+  "max_drawdown": 0.0,
+  "total_trades": 0,
+  "winning_trades": 0,
+  "win_rate": 0,
+  "enhanced_ai_trades": 0,
+  "strategy_stats": {
+    "strategy_name": "Enhanced_AI_Strategy",
+    "model_info": {
+      "name": "enhanced_ai",
+      "type": "enhanced_multi_factor_ai",
+      "is_trained": false,
+      "factors": [
+        "momentum",
+        "mean_reversion",
+        "volatility",
+        "volume",
+        "technical",
+        "microstructure"
+      ],
+      "factor_weights": {
+        "momentum": 0.25,
+        "mean_reversion": 0.2,
+        "volatility": 0.15,
+        "volume": 0.15,
+        "technical": 0.15,
+        "microstructure": 0.1
+      },
+      "description": "Enhanced multi-factor AI model with 330+ features"
+    },
+    "feature_count": 0,
+    "signals_generated": 0,
+    "last_signal": null
+  },
+  "portfolio_history": [
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    }
+  ],
+  "trades": [],
+  "performance_stats": {
+    "total_backtest_time": 6.007093,
+    "avg_prediction_time": 0.059903149999999995,
+    "max_prediction_time": 0.081798,
+    "feature_calculations": 100,
+    "features_per_calculation": 0
+  }
+}

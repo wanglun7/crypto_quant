@@ -1,0 +1,1058 @@
+{
+  "initial_capital": 50000.0,
+  "final_value": 52218.8499698935,
+  "total_return": 0.04437699939786995,
+  "annualized_return": 0.9354773080752661,
+  "volatility": 0.256487106546917,
+  "sharpe_ratio": 3.5692917293205366,
+  "max_drawdown": 0.03395512136483447,
+  "total_trades": 43,
+  "winning_trades": 20,
+  "win_rate": 0.46511627906976744,
+  "enhanced_ai_trades": 43,
+  "strategy_stats": {
+    "strategy_name": "Enhanced_AI_Strategy",
+    "model_info": {
+      "name": "enhanced_ai",
+      "type": "enhanced_multi_factor_ai",
+      "is_trained": false,
+      "factors": [
+        "momentum",
+        "mean_reversion",
+        "volatility",
+        "volume",
+        "technical",
+        "microstructure"
+      ],
+      "factor_weights": {
+        "momentum": 0.25,
+        "mean_reversion": 0.2,
+        "volatility": 0.15,
+        "volume": 0.15,
+        "technical": 0.15,
+        "microstructure": 0.1
+      },
+      "description": "Enhanced multi-factor AI model with 330+ features"
+    },
+    "feature_count": 194,
+    "signals_generated": 42,
+    "last_signal": {
+      "timestamp": "2025-07-08T22:40:05.702419",
+      "symbol": "BTCUSDT",
+      "signal_type": "SignalType.SHORT",
+      "strength": 0.10549229846659414,
+      "confidence": 0.43882563179992745,
+      "strategy_name": "Enhanced_AI_Strategy",
+      "features": {
+        "probabilities": [
+          0.43882563179992745,
+          0.3728220577400508,
+          0.1883523104600218
+        ],
+        "prediction_action": 0,
+        "price": 98673.12405175684,
+        "volume": 2779.8170990056033,
+        "feature_count": 194,
+        "model_type": "enhanced_multi_factor"
+      }
+    }
+  },
+  "portfolio_history": [
+    {
+      "total_value": 50000.0,
+      "cash": 50000.0,
+      "btc_value": 0.0,
+      "unrealized_pnl": 0.0
+    },
+    {
+      "total_value": 49993.884669235056,
+      "cash": 45921.074379781036,
+      "btc_value": 4072.810289454017,
+      "unrealized_pnl": -6.115330764945972
+    },
+    {
+      "total_value": 49984.46643966761,
+      "cash": 42529.04147307892,
+      "btc_value": 7455.424966588688,
+      "unrealized_pnl": -15.533560332392215
+    },
+    {
+      "total_value": 49970.84919325133,
+      "cash": 39537.74890663181,
+      "btc_value": 10433.100286619521,
+      "unrealized_pnl": -29.150806748671148
+    },
+    {
+      "total_value": 49963.57996212379,
+      "cash": 36677.8827258886,
+      "btc_value": 13285.697236235188,
+      "unrealized_pnl": -36.42003787621289
+    },
+    {
+      "total_value": 49886.81716412129,
+      "cash": 37765.08947402514,
+      "btc_value": 12121.72769009615,
+      "unrealized_pnl": -113.18283587871329
+    },
+    {
+      "total_value": 49846.100035454496,
+      "cash": 37765.08947402514,
+      "btc_value": 12081.010561429359,
+      "unrealized_pnl": -153.89996454550453
+    },
+    {
+      "total_value": 49839.96851722813,
+      "cash": 38797.11218623958,
+      "btc_value": 11042.85633098855,
+      "unrealized_pnl": -160.03148277186946
+    },
+    {
+      "total_value": 49798.89915219854,
+      "cash": 38797.11218623958,
+      "btc_value": 11001.78696595896,
+      "unrealized_pnl": -201.10084780146028
+    },
+    {
+      "total_value": 49803.58081508279,
+      "cash": 35461.182201023475,
+      "btc_value": 14342.398614059308,
+      "unrealized_pnl": -196.4191849172153
+    },
+    {
+      "total_value": 49856.64057327825,
+      "cash": 32806.516185604494,
+      "btc_value": 17050.12438767376,
+      "unrealized_pnl": -143.35942672174895
+    },
+    {
+      "total_value": 49907.48065502498,
+      "cash": 30273.446925545682,
+      "btc_value": 19634.03372947929,
+      "unrealized_pnl": -92.5193449750254
+    },
+    {
+      "total_value": 49951.03103561527,
+      "cash": 30273.446925545682,
+      "btc_value": 19677.584110069587,
+      "unrealized_pnl": -48.968964384730334
+    },
+    {
+      "total_value": 50049.784189357335,
+      "cash": 27961.2355614262,
+      "btc_value": 22088.548627931134,
+      "unrealized_pnl": 49.784189357334945
+    },
+    {
+      "total_value": 50097.53216228426,
+      "cash": 27961.2355614262,
+      "btc_value": 22136.29660085806,
+      "unrealized_pnl": 97.5321622842621
+    },
+    {
+      "total_value": 50062.113081434494,
+      "cash": 29828.24250451586,
+      "btc_value": 20233.870576918638,
+      "unrealized_pnl": 62.11308143449672
+    },
+    {
+      "total_value": 50055.60834151552,
+      "cash": 31844.505251643222,
+      "btc_value": 18211.103089872297,
+      "unrealized_pnl": 55.60834151552197
+    },
+    {
+      "total_value": 50064.54025169359,
+      "cash": 33449.06206751283,
+      "btc_value": 16615.47818418076,
+      "unrealized_pnl": 64.5402516935886
+    },
+    {
+      "total_value": 50108.97195913916,
+      "cash": 30632.297036217824,
+      "btc_value": 19476.67492292134,
+      "unrealized_pnl": 108.97195913916192
+    },
+    {
+      "total_value": 49921.17182371721,
+      "cash": 30632.297036217824,
+      "btc_value": 19288.874787499386,
+      "unrealized_pnl": -78.82817628278782
+    },
+    {
+      "total_value": 49765.86040988184,
+      "cash": 30632.297036217824,
+      "btc_value": 19133.563373664016,
+      "unrealized_pnl": -234.1395901181608
+    },
+    {
+      "total_value": 49564.92509847268,
+      "cash": 30632.297036217824,
+      "btc_value": 18932.628062254862,
+      "unrealized_pnl": -435.07490152731464
+    },
+    {
+      "total_value": 49417.91144789635,
+      "cash": 30632.297036217824,
+      "btc_value": 18785.61441167853,
+      "unrealized_pnl": -582.0885521036472
+    },
+    {
+      "total_value": 49280.913020045584,
+      "cash": 30632.297036217824,
+      "btc_value": 18648.615983827756,
+      "unrealized_pnl": -719.0869799544189
+    },
+    {
+      "total_value": 49113.88429168506,
+      "cash": 30632.297036217824,
+      "btc_value": 18481.587255467235,
+      "unrealized_pnl": -886.1157083149388
+    },
+    {
+      "total_value": 49046.46536783829,
+      "cash": 30632.297036217824,
+      "btc_value": 18414.16833162046,
+      "unrealized_pnl": -953.5346321617131
+    },
+    {
+      "total_value": 48889.391176541474,
+      "cash": 27905.779192354697,
+      "btc_value": 20983.61198418678,
+      "unrealized_pnl": -1110.6088234585227
+    },
+    {
+      "total_value": 48744.1692745211,
+      "cash": 27905.779192354697,
+      "btc_value": 20838.3900821664,
+      "unrealized_pnl": -1255.8307254789052
+    },
+    {
+      "total_value": 48689.781424880006,
+      "cash": 25423.791232996704,
+      "btc_value": 23265.990191883306,
+      "unrealized_pnl": -1310.2185751199906
+    },
+    {
+      "total_value": 48613.458836981255,
+      "cash": 22746.201133947226,
+      "btc_value": 25867.25770303403,
+      "unrealized_pnl": -1386.5411630187423
+    },
+    {
+      "total_value": 48574.03193382571,
+      "cash": 20640.514635836273,
+      "btc_value": 27933.51729798944,
+      "unrealized_pnl": -1425.9680661742866
+    },
+    {
+      "total_value": 48447.75551929173,
+      "cash": 18782.969067729766,
+      "btc_value": 29664.786451561962,
+      "unrealized_pnl": -1552.2444807082738
+    },
+    {
+      "total_value": 48471.11820757389,
+      "cash": 18782.969067729766,
+      "btc_value": 29688.14913984413,
+      "unrealized_pnl": -1528.8817924261068
+    },
+    {
+      "total_value": 48407.515734799505,
+      "cash": 17236.854387515366,
+      "btc_value": 31170.661347284138,
+      "unrealized_pnl": -1592.4842652004977
+    },
+    {
+      "total_value": 48613.872574188514,
+      "cash": 17236.854387515366,
+      "btc_value": 31377.01818667315,
+      "unrealized_pnl": -1386.1274258114838
+    },
+    {
+      "total_value": 48943.07612236883,
+      "cash": 17236.854387515366,
+      "btc_value": 31706.22173485347,
+      "unrealized_pnl": -1056.9238776311652
+    },
+    {
+      "total_value": 49244.349606798954,
+      "cash": 17236.854387515366,
+      "btc_value": 32007.49521928359,
+      "unrealized_pnl": -755.6503932010446
+    },
+    {
+      "total_value": 49516.81745755334,
+      "cash": 17236.854387515366,
+      "btc_value": 32279.96307003798,
+      "unrealized_pnl": -483.18254244665695
+    },
+    {
+      "total_value": 49746.562261312494,
+      "cash": 17236.854387515366,
+      "btc_value": 32509.707873797128,
+      "unrealized_pnl": -253.43773868750793
+    },
+    {
+      "total_value": 49945.441173651154,
+      "cash": 17236.854387515366,
+      "btc_value": 32708.586786135787,
+      "unrealized_pnl": -54.5588263488469
+    },
+    {
+      "total_value": 50100.60957024827,
+      "cash": 20152.042052378216,
+      "btc_value": 29948.567517870055,
+      "unrealized_pnl": 100.60957024826936
+    },
+    {
+      "total_value": 50369.901031975765,
+      "cash": 20152.042052378216,
+      "btc_value": 30217.858979597553,
+      "unrealized_pnl": 369.90103197576883
+    },
+    {
+      "total_value": 50429.40384888017,
+      "cash": 23041.27882639742,
+      "btc_value": 27388.125022482745,
+      "unrealized_pnl": 429.4038488801667
+    },
+    {
+      "total_value": 50435.32493859143,
+      "cash": 23041.27882639742,
+      "btc_value": 27394.046112194013,
+      "unrealized_pnl": 435.3249385914318
+    },
+    {
+      "total_value": 50414.429202267616,
+      "cash": 25275.84473528049,
+      "btc_value": 25138.584466987126,
+      "unrealized_pnl": 414.4292022676151
+    },
+    {
+      "total_value": 50483.77244950547,
+      "cash": 28116.87022148672,
+      "btc_value": 22366.902228018753,
+      "unrealized_pnl": 483.7724495054719
+    },
+    {
+      "total_value": 50339.98081113017,
+      "cash": 28116.87022148672,
+      "btc_value": 22223.110589643453,
+      "unrealized_pnl": 339.9808111301708
+    },
+    {
+      "total_value": 50335.59107273726,
+      "cash": 28116.87022148672,
+      "btc_value": 22218.720851250542,
+      "unrealized_pnl": 335.59107273726295
+    },
+    {
+      "total_value": 50294.30440134235,
+      "cash": 29955.777049980654,
+      "btc_value": 20338.527351361696,
+      "unrealized_pnl": 294.30440134235096
+    },
+    {
+      "total_value": 50263.94493151867,
+      "cash": 29955.777049980654,
+      "btc_value": 20308.167881538022,
+      "unrealized_pnl": 263.9449315186748
+    },
+    {
+      "total_value": 50229.030700348034,
+      "cash": 29955.777049980654,
+      "btc_value": 20273.25365036738,
+      "unrealized_pnl": 229.03070034803352
+    },
+    {
+      "total_value": 50220.89923913584,
+      "cash": 27034.700023482183,
+      "btc_value": 23186.199215653658,
+      "unrealized_pnl": 220.8992391358412
+    },
+    {
+      "total_value": 50368.02373518922,
+      "cash": 27034.700023482183,
+      "btc_value": 23333.323711707035,
+      "unrealized_pnl": 368.02373518921945
+    },
+    {
+      "total_value": 50432.69920459379,
+      "cash": 27034.700023482183,
+      "btc_value": 23397.999181111605,
+      "unrealized_pnl": 432.6992045937886
+    },
+    {
+      "total_value": 50378.57957473996,
+      "cash": 29189.35141928094,
+      "btc_value": 21189.22815545902,
+      "unrealized_pnl": 378.57957473996044
+    },
+    {
+      "total_value": 50391.93513272508,
+      "cash": 31212.363495190773,
+      "btc_value": 19179.571637534307,
+      "unrealized_pnl": 391.9351327250802
+    },
+    {
+      "total_value": 50364.048685420006,
+      "cash": 33015.60863135273,
+      "btc_value": 17348.44005406728,
+      "unrealized_pnl": 364.04868542000577
+    },
+    {
+      "total_value": 50355.96087492215,
+      "cash": 34656.455275879984,
+      "btc_value": 15699.505599042168,
+      "unrealized_pnl": 355.9608749221486
+    },
+    {
+      "total_value": 50326.75002132069,
+      "cash": 35985.51428061214,
+      "btc_value": 14341.235740708547,
+      "unrealized_pnl": 326.75002132068784
+    },
+    {
+      "total_value": 50252.85443080744,
+      "cash": 35985.51428061214,
+      "btc_value": 14267.340150195301,
+      "unrealized_pnl": 252.85443080744088
+    },
+    {
+      "total_value": 50147.88366962146,
+      "cash": 35985.51428061214,
+      "btc_value": 14162.36938900932,
+      "unrealized_pnl": 147.88366962145926
+    },
+    {
+      "total_value": 50040.73421224952,
+      "cash": 35985.51428061214,
+      "btc_value": 14055.21993163738,
+      "unrealized_pnl": 40.734212249520404
+    },
+    {
+      "total_value": 49961.15143603453,
+      "cash": 35985.51428061214,
+      "btc_value": 13975.637155422395,
+      "unrealized_pnl": -38.84856396546477
+    },
+    {
+      "total_value": 49837.65048076242,
+      "cash": 35985.51428061214,
+      "btc_value": 13852.13620015028,
+      "unrealized_pnl": -162.3495192375794
+    },
+    {
+      "total_value": 49773.89450539645,
+      "cash": 35985.51428061214,
+      "btc_value": 13788.380224784307,
+      "unrealized_pnl": -226.10549460355267
+    },
+    {
+      "total_value": 49652.003768849754,
+      "cash": 35985.51428061214,
+      "btc_value": 13666.489488237612,
+      "unrealized_pnl": -347.9962311502477
+    },
+    {
+      "total_value": 49546.61180732802,
+      "cash": 35985.51428061214,
+      "btc_value": 13561.097526715881,
+      "unrealized_pnl": -453.3881926719784
+    },
+    {
+      "total_value": 49476.87048916641,
+      "cash": 35985.51428061214,
+      "btc_value": 13491.356208554269,
+      "unrealized_pnl": -523.1295108335914
+    },
+    {
+      "total_value": 49504.989427672546,
+      "cash": 35985.51428061214,
+      "btc_value": 13519.475147060406,
+      "unrealized_pnl": -495.01057232745393
+    },
+    {
+      "total_value": 49480.20867375866,
+      "cash": 33283.219911927015,
+      "btc_value": 16196.988761831642,
+      "unrealized_pnl": -519.7913262413431
+    },
+    {
+      "total_value": 49457.86839848461,
+      "cash": 30096.408373478345,
+      "btc_value": 19361.46002500626,
+      "unrealized_pnl": -542.1316015153923
+    },
+    {
+      "total_value": 49434.76330082471,
+      "cash": 27375.69016358826,
+      "btc_value": 22059.073137236446,
+      "unrealized_pnl": -565.236699175292
+    },
+    {
+      "total_value": 49509.35414449422,
+      "cash": 27375.69016358826,
+      "btc_value": 22133.663980905956,
+      "unrealized_pnl": -490.6458555057814
+    },
+    {
+      "total_value": 49483.82625541477,
+      "cash": 24891.224025578213,
+      "btc_value": 24592.60222983656,
+      "unrealized_pnl": -516.1737445852235
+    },
+    {
+      "total_value": 49550.00356145175,
+      "cash": 24891.224025578213,
+      "btc_value": 24658.77953587353,
+      "unrealized_pnl": -449.99643854825575
+    },
+    {
+      "total_value": 49638.98325566093,
+      "cash": 24891.224025578213,
+      "btc_value": 24747.75923008272,
+      "unrealized_pnl": -361.0167443390666
+    },
+    {
+      "total_value": 49856.11048293015,
+      "cash": 24891.224025578213,
+      "btc_value": 24964.88645735193,
+      "unrealized_pnl": -143.88951706985546
+    },
+    {
+      "total_value": 50216.55285291601,
+      "cash": 24891.224025578213,
+      "btc_value": 25325.328827337795,
+      "unrealized_pnl": 216.5528529160075
+    },
+    {
+      "total_value": 50507.8762187168,
+      "cash": 24891.224025578213,
+      "btc_value": 25616.65219313859,
+      "unrealized_pnl": 507.8762187168059
+    },
+    {
+      "total_value": 50881.562783750865,
+      "cash": 24891.224025578213,
+      "btc_value": 25990.33875817265,
+      "unrealized_pnl": 881.5627837508624
+    },
+    {
+      "total_value": 51189.30441260969,
+      "cash": 24891.224025578213,
+      "btc_value": 26298.08038703147,
+      "unrealized_pnl": 1189.3044126096838
+    },
+    {
+      "total_value": 51500.04659871793,
+      "cash": 24891.224025578213,
+      "btc_value": 26608.82257313971,
+      "unrealized_pnl": 1500.0465987179234
+    },
+    {
+      "total_value": 51897.02216354828,
+      "cash": 24891.224025578213,
+      "btc_value": 27005.798137970065,
+      "unrealized_pnl": 1897.0221635482797
+    },
+    {
+      "total_value": 52240.18170309239,
+      "cash": 24891.224025578213,
+      "btc_value": 27348.95767751418,
+      "unrealized_pnl": 2240.181703092392
+    },
+    {
+      "total_value": 52386.266703063775,
+      "cash": 24891.224025578213,
+      "btc_value": 27495.042677485562,
+      "unrealized_pnl": 2386.2667030637754
+    },
+    {
+      "total_value": 52511.57337729713,
+      "cash": 27475.899235374258,
+      "btc_value": 25035.674141922875,
+      "unrealized_pnl": 2511.5733772971316
+    },
+    {
+      "total_value": 52573.820544937036,
+      "cash": 29560.799470765985,
+      "btc_value": 23013.021074171054,
+      "unrealized_pnl": 2573.8205449370394
+    },
+    {
+      "total_value": 52543.4967319048,
+      "cash": 31858.102659999986,
+      "btc_value": 20685.394071904815,
+      "unrealized_pnl": 2543.4967319048023
+    },
+    {
+      "total_value": 52569.234607916354,
+      "cash": 33757.04847331288,
+      "btc_value": 18812.186134603475,
+      "unrealized_pnl": 2569.2346079163553
+    },
+    {
+      "total_value": 52519.688638862404,
+      "cash": 35267.7157281129,
+      "btc_value": 17251.972910749508,
+      "unrealized_pnl": 2519.6886388624034
+    },
+    {
+      "total_value": 52575.754499184426,
+      "cash": 37036.13887343999,
+      "btc_value": 15539.615625744433,
+      "unrealized_pnl": 2575.7544991844234
+    },
+    {
+      "total_value": 52636.582234872454,
+      "cash": 37036.13887343999,
+      "btc_value": 15600.44336143246,
+      "unrealized_pnl": 2636.582234872451
+    },
+    {
+      "total_value": 52595.93057226604,
+      "cash": 38474.7887103043,
+      "btc_value": 14121.14186196174,
+      "unrealized_pnl": 2595.930572266042
+    },
+    {
+      "total_value": 52535.49566109366,
+      "cash": 38474.7887103043,
+      "btc_value": 14060.706950789356,
+      "unrealized_pnl": 2535.495661093659
+    },
+    {
+      "total_value": 52478.23379748695,
+      "cash": 38474.7887103043,
+      "btc_value": 14003.44508718265,
+      "unrealized_pnl": 2478.233797486953
+    },
+    {
+      "total_value": 52428.03650311787,
+      "cash": 38474.7887103043,
+      "btc_value": 13953.24779281357,
+      "unrealized_pnl": 2428.036503117872
+    },
+    {
+      "total_value": 52392.94445554281,
+      "cash": 38474.7887103043,
+      "btc_value": 13918.155745238513,
+      "unrealized_pnl": 2392.944455542816
+    },
+    {
+      "total_value": 52362.69888000187,
+      "cash": 38474.7887103043,
+      "btc_value": 13887.910169697569,
+      "unrealized_pnl": 2362.6988800018707
+    },
+    {
+      "total_value": 52309.49524049551,
+      "cash": 38474.7887103043,
+      "btc_value": 13834.706530191206,
+      "unrealized_pnl": 2309.495240495508
+    },
+    {
+      "total_value": 52218.8499698935,
+      "cash": 38474.7887103043,
+      "btc_value": 13744.061259589196,
+      "unrealized_pnl": 2218.849969893498
+    }
+  ],
+  "trades": [
+    {
+      "timestamp": "2024-12-05T10:00:00",
+      "side": "buy",
+      "quantity": 0.04296164612160153,
+      "price": 94848.47678008016,
+      "commission": 4.078925620218963,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-05T16:00:00",
+      "side": "buy",
+      "quantity": 0.03576493498052927,
+      "price": 94747.57540144335,
+      "commission": 3.3920329067021173,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-05T22:00:00",
+      "side": "buy",
+      "quantity": 0.03157828874450741,
+      "price": 94631.514014528,
+      "commission": 2.991292566447112,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-06T04:00:00",
+      "side": "buy",
+      "quantity": 0.030199485384553533,
+      "price": 94604.47018159354,
+      "commission": 2.8598661807432078,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-06T10:00:00",
+      "side": "sell",
+      "quantity": 0.011580629727300139,
+      "price": 93975.46323531728,
+      "commission": 1.0882950431797165,
+      "pnl": -8.64055411344612,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-06T22:00:00",
+      "side": "sell",
+      "quantity": 0.01103405862278445,
+      "price": 93624.27763880539,
+      "commission": 1.033055767982426,
+      "pnl": -12.107748248364505,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-07T10:00:00",
+      "side": "buy",
+      "quantity": 0.03566118430740917,
+      "price": 93451.58103844822,
+      "commission": 3.335929985216102,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-07T16:00:00",
+      "side": "buy",
+      "quantity": 0.028266039392591345,
+      "price": 93823.2382885121,
+      "commission": 2.6546660154189867,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-07T22:00:00",
+      "side": "buy",
+      "quantity": 0.026885161271397492,
+      "price": 94123.89850496927,
+      "commission": 2.533069260058807,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-08T10:00:00",
+      "side": "buy",
+      "quantity": 0.024360189644917436,
+      "price": 94822.70813262342,
+      "commission": 2.312211364119481,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-08T22:00:00",
+      "side": "sell",
+      "quantity": 0.019715371056811263,
+      "price": 94792.83009806229,
+      "commission": 1.8688758189085648,
+      "pnl": 7.904122418138592,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-09T04:00:00",
+      "side": "sell",
+      "quantity": 0.021295153754231248,
+      "price": 94776.54171689168,
+      "commission": 2.01828102815552,
+      "pnl": 8.190612162819791,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-09T10:00:00",
+      "side": "sell",
+      "quantity": 0.016936293328960277,
+      "price": 94835.56688888882,
+      "commission": 1.606162978848454,
+      "pnl": 7.5137605388711455,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-09T16:00:00",
+      "side": "buy",
+      "quantity": 0.02955566211273865,
+      "price": 95208.43266951825,
+      "commission": 2.8167650312950046,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-11T16:00:00",
+      "side": "buy",
+      "quantity": 0.030512960759930166,
+      "price": 89266.70038510869,
+      "commission": 2.726517843863128,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-12T04:00:00",
+      "side": "buy",
+      "quantity": 0.028038126766991477,
+      "price": 88433.36760705741,
+      "commission": 2.4819879593579914,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-12T10:00:00",
+      "side": "buy",
+      "quantity": 0.03034207382533598,
+      "price": 88158.526155745,
+      "commission": 2.677590099049477,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-12T16:00:00",
+      "side": "buy",
+      "quantity": 0.023894847103255346,
+      "price": 88034.91407677848,
+      "commission": 2.1056864981109547,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-12T22:00:00",
+      "side": "buy",
+      "quantity": 0.021172602893789753,
+      "price": 87645.71988844623,
+      "commission": 1.8575455681065094,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-13T10:00:00",
+      "side": "buy",
+      "quantity": 0.017645420485880744,
+      "price": 87533.67859780362,
+      "commission": 1.5461146802143995,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-15T04:00:00",
+      "side": "sell",
+      "quantity": 0.03164689630826184,
+      "price": 92208.27667298529,
+      "commission": 2.9181057706334843,
+      "pnl": -3.6001459343789173,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-15T16:00:00",
+      "side": "sell",
+      "quantity": 0.03102012416213502,
+      "price": 93233.95637637159,
+      "commission": 2.8921289029221264,
+      "pnl": 28.287867315768374,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-16T04:00:00",
+      "side": "sell",
+      "quantity": 0.024001470297386227,
+      "price": 93194.40367110567,
+      "commission": 2.236802711594665,
+      "pnl": 20.938094378029295,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-16T10:00:00",
+      "side": "sell",
+      "quantity": 0.030426358834707644,
+      "price": 93467.29166678208,
+      "commission": 2.843869355561791,
+      "pnl": 34.84594419571326,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-17T04:00:00",
+      "side": "sell",
+      "quantity": 0.019859807887187293,
+      "price": 92687.07867298037,
+      "commission": 1.8407475760700047,
+      "pnl": 7.249667121879326,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-17T22:00:00",
+      "side": "buy",
+      "quantity": 0.031559596504579165,
+      "price": 92464.93214983153,
+      "commission": 2.9210770264984713,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-18T16:00:00",
+      "side": "sell",
+      "quantity": 0.023188096596269414,
+      "price": 93013.59406747326,
+      "commission": 2.156808204002761,
+      "pnl": 15.812648797381641,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-18T22:00:00",
+      "side": "sell",
+      "quantity": 0.02175457920652392,
+      "price": 93085.55655333352,
+      "commission": 2.0250371130228557,
+      "pnl": 16.40060449526573,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-19T04:00:00",
+      "side": "sell",
+      "quantity": 0.01941679234648148,
+      "price": 92963.3563638226,
+      "commission": 1.8050501863483013,
+      "pnl": 12.265429843068054,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-19T10:00:00",
+      "side": "sell",
+      "quantity": 0.01767386419164642,
+      "price": 92933.22138557787,
+      "commission": 1.6424891336609138,
+      "pnl": 10.631834786874826,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-19T16:00:00",
+      "side": "sell",
+      "quantity": 0.014340400513185383,
+      "price": 92772.12257098749,
+      "commission": 1.330389394126286,
+      "pnl": 6.316345218321037,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-22T10:00:00",
+      "side": "buy",
+      "quantity": 0.030884424438152466,
+      "price": 87409.49923552897,
+      "commission": 2.7022943686851253,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-22T16:00:00",
+      "side": "buy",
+      "quantity": 0.036461488927210794,
+      "price": 87314.72083506487,
+      "commission": 3.1868115384486684,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-22T22:00:00",
+      "side": "buy",
+      "quantity": 0.031159362433789264,
+      "price": 87228.9186743049,
+      "commission": 2.7207182098900855,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-23T10:00:00",
+      "side": "buy",
+      "quantity": 0.02838572870435468,
+      "price": 87437.65917452997,
+      "commission": 2.484466138010047,
+      "pnl": 0.0,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-26T10:00:00",
+      "side": "sell",
+      "quantity": 0.026368811239498267,
+      "price": 98118.28257137393,
+      "commission": 2.587262472268312,
+      "pnl": 180.61935335834525,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-26T16:00:00",
+      "side": "sell",
+      "quantity": 0.02121471558274894,
+      "price": 98374.50869769881,
+      "commission": 2.086987222614342,
+      "pnl": 150.75093144711653,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-26T22:00:00",
+      "side": "sell",
+      "quantity": 0.023403332438976385,
+      "price": 98259.63024805055,
+      "commission": 2.2996027920260267,
+      "pnl": 163.61461788122156,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-27T04:00:00",
+      "side": "sell",
+      "quantity": 0.01931844329147867,
+      "price": 98395.43649002652,
+      "commission": 1.9008466599728684,
+      "pnl": 137.68038777294709,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-27T10:00:00",
+      "side": "sell",
+      "quantity": 0.015407109868134313,
+      "price": 98148.15673910448,
+      "commission": 1.51217943423425,
+      "pnl": 105.99488500840424,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-27T16:00:00",
+      "side": "sell",
+      "quantity": 0.017974748801597003,
+      "price": 98482.22961026763,
+      "commission": 1.7701933386657591,
+      "pnl": 129.6641117470828,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-28T04:00:00",
+      "side": "sell",
+      "quantity": 0.014601851778822117,
+      "price": 98623.78748973097,
+      "commission": 1.4400899267911025,
+      "pnl": 107.40011428235488,
+      "signal_source": "Enhanced_AI_Enhanced_AI_Strategy"
+    },
+    {
+      "timestamp": "2024-12-30T00:00:00",
+      "side": "sell",
+      "quantity": 0.14311031496838797,
+      "price": 96038.43501561998,
+      "commission": 13.744090684156436,
+      "pnl": 682.6200082314087,
+      "signal_source": "Enhanced_AI_FINAL_EXIT"
+    }
+  ],
+  "performance_stats": {
+    "total_backtest_time": 23.344102,
+    "avg_prediction_time": 0.23325437000000002,
+    "max_prediction_time": 0.435532,
+    "feature_calculations": 100,
+    "features_per_calculation": 194
+  }
+}
