@@ -2,8 +2,9 @@
 
 import asyncio
 import os
+from datetime import datetime
 from decimal import Decimal
-from typing import Any
+from typing import Any, List, Dict, Union
 
 import asyncpg
 import structlog
@@ -17,7 +18,7 @@ class TimescaleWriter:
 
     def __init__(
         self,
-        database_url: str | None = None,
+        database_url: Union[str, None] = None,
         pool_size: int = 10,
         batch_size: int = 1000,
     ):
@@ -34,8 +35,8 @@ class TimescaleWriter:
         )
         self.pool_size = pool_size
         self.batch_size = batch_size
-        self._pool: Pool | None = None
-        self._batch: list[dict[str, Any]] = []
+        self._pool: Union[Pool, None] = None
+        self._batch: List[Dict[str, Any]] = []
         self._batch_lock = asyncio.Lock()
 
     async def connect(self) -> None:
@@ -127,7 +128,7 @@ class TimescaleWriter:
                 for trade in batch_to_insert:
                     records.append((
                         # Convert milliseconds to timestamp
-                        asyncpg.types.datetime.datetime.fromtimestamp(
+                        datetime.fromtimestamp(
                             trade["E"] / 1000
                         ),
                         trade["s"],  # symbol
