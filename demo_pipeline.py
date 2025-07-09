@@ -15,6 +15,7 @@ import asyncio
 import signal
 import sys
 from datetime import datetime, timedelta
+from typing import Optional
 
 import structlog
 
@@ -82,7 +83,7 @@ class PipelineStats:
 async def run_pipeline(
     database_url: str,
     batch_size: int,
-    duration: int | None = None,
+    duration: Optional[int] = None,
 ) -> None:
     """Run the data collection pipeline.
     

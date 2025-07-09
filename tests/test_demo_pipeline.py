@@ -57,7 +57,7 @@ def test_demo_pipeline_help():
     )
 
     assert result.returncode == 0
-    assert "Demo pipeline for Binance WebSocket to TimescaleDB" in result.stdout
+    assert "Demo pipeline for BinanceWSCollector + TimescaleWriter" in result.stdout
     assert "--database-url" in result.stdout
     assert "--duration" in result.stdout
     assert "--batch-size" in result.stdout

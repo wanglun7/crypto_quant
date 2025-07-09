@@ -49,7 +49,8 @@ async def test_writer_connect_disconnect():
     """Test connection and disconnection."""
     mock_pool = AsyncMock()
 
-    with patch("asyncpg.create_pool", return_value=mock_pool) as mock_create:
+    with patch("asyncpg.create_pool", new_callable=AsyncMock) as mock_create:
+        mock_create.return_value = mock_pool
         writer = TimescaleWriter()
 
         # Mock _create_tables to avoid database operations
@@ -69,9 +70,16 @@ async def test_writer_batch_logic(sample_trade):
     writer = TimescaleWriter(batch_size=2)
     writer._pool = AsyncMock()
 
-    # Mock connection and execute
+    # Mock connection and execute  
     mock_conn = AsyncMock()
-    writer._pool.acquire.return_value.__aenter__.return_value = mock_conn
+    # Use asynccontextmanager to create proper mock
+    from contextlib import asynccontextmanager
+    
+    @asynccontextmanager
+    async def mock_acquire():
+        yield mock_conn
+    
+    writer._pool.acquire = mock_acquire
 
     # Add first trade - should not flush yet
     await writer.write_trade(sample_trade)
@@ -108,7 +116,14 @@ async def test_writer_manual_flush(sample_trade):
     writer._pool = AsyncMock()
 
     mock_conn = AsyncMock()
-    writer._pool.acquire.return_value.__aenter__.return_value = mock_conn
+    # Use asynccontextmanager to create proper mock
+    from contextlib import asynccontextmanager
+    
+    @asynccontextmanager
+    async def mock_acquire():
+        yield mock_conn
+    
+    writer._pool.acquire = mock_acquire
 
     # Add one trade
     await writer.write_trade(sample_trade)
@@ -128,7 +143,14 @@ async def test_writer_error_handling(sample_trade):
 
     mock_conn = AsyncMock()
     mock_conn.executemany.side_effect = asyncpg.PostgresError("Connection error")
-    writer._pool.acquire.return_value.__aenter__.return_value = mock_conn
+    # Use asynccontextmanager to create proper mock
+    from contextlib import asynccontextmanager
+    
+    @asynccontextmanager
+    async def mock_acquire():
+        yield mock_conn
+    
+    writer._pool.acquire = mock_acquire
 
     # Add trade - should fail but re-add to batch
     await writer.write_trade(sample_trade)
