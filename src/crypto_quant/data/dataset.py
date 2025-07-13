@@ -65,10 +65,10 @@ def build_dataset(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame, lookback: int =
             future_return = np.log(df_ohlcv['close'].iloc[future_idx] / 
                                  df_ohlcv['close'].iloc[current_idx])
             
-            # Label based on future return - using spec thresholds ±0.0003 (±0.03%)
-            if future_return > 0.0003:  # +0.03%
+            # Label based on future return - using adjusted thresholds ±0.0005 (±0.05%)
+            if future_return > 0.0005:  # +0.05%
                 label = 2  # Up
-            elif future_return < -0.0003:  # -0.03%
+            elif future_return < -0.0005:  # -0.05%
                 label = 0  # Down
             else:
                 label = 1  # Hold

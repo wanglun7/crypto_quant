@@ -17,7 +17,7 @@ def sample_data():
     end   = datetime.now(timezone.utc).replace(second=0, microsecond=0)
     start = end - timedelta(hours=72)
     ohlcv = fetch_ohlcv("BTC/USDT", "1m", start, end)
-    feats = generate_features(ohlcv, scales=["1m", "5m"])
+    feats = generate_features(ohlcv, scales=["1m", "5m", "15m"])
     CACHE.write_bytes(pickle.dumps((ohlcv, feats)))
     return ohlcv, feats
 
@@ -25,7 +25,7 @@ def test_dataset_shapes(sample_data):
     ohlcv, feats = sample_data
     X, y = build_dataset(ohlcv, feats, lookback=60, horizon=5)
     assert X.shape[0] == y.shape[0]
-    assert X.shape[2] == feats.shape[1] + 5  # Original features + 5 new features
+    assert X.shape[2] == feats.shape[1] + 5  # Original features (27) + 5 new features = 32
     assert not np.isnan(X).any()
 
 def test_training_convergence(sample_data):
