@@ -1,0 +1,26 @@
+{
+  "simple_strategy": {
+    "return": 0.033502794993735936,
+    "annual_return": 10,
+    "trades": "49"
+  },
+  "intelligent_strategy": {
+    "return": 0.057260367546139605,
+    "annual_return": 10,
+    "max_drawdown": 0.012446484303843305,
+    "trades": 3791,
+    "performance": {
+      "total_return": 0.057260367546139605,
+      "annual_return": 0.9688551050237559,
+      "sharpe_ratio": 26.060841611101015,
+      "max_drawdown": 0.012446484303843305,
+      "final_value": 10572.603675461396,
+      "total_trades": 3791,
+      "win_rate": 0.370712401055409
+    }
+  },
+  "improvement": {
+    "return_improvement": 70.9122106285331,
+    "annual_return_improvement": 0.0
+  }
+}

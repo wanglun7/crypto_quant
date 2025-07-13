@@ -1,0 +1,51 @@
+# BTC Quantitative Trading Strategy Configuration
+
+# Data Settings
+data:
+  symbol: "BTC/USDT"
+  timeframe: "1m"
+  days: 3
+  cache_dir: "data/"
+  
+# Model Architecture
+model:
+  sequence_length: 30
+  n_features: 18
+  cnn_filters: [32, 64, 128]
+  kernel_sizes: [3, 5, 7]
+  lstm_hidden_size: 64
+  lstm_num_layers: 2
+  dropout_rate: 0.3
+  fc_hidden_size: 64
+
+# Training Parameters
+training:
+  epochs: 10
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 1e-4
+  test_size: 0.3
+  random_state: 42
+  
+# Trading Strategy
+strategy:
+  decision_threshold: 0.3  # Optimized from backtest
+  transaction_cost: 0.0004  # 0.04% Binance fee
+  
+# Paths
+paths:
+  models: "models/"
+  results: "results/"
+  scripts: "scripts/"
+  
+# Logging
+logging:
+  level: "INFO"
+  format: "json"
+  
+# Performance Targets (from CLAUDE.md)
+targets:
+  annual_return: 0.70  # 70%
+  sharpe_ratio: 1.5
+  max_drawdown: 0.25   # 25%
+  execution_latency: 0.1  # 100ms

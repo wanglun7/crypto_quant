@@ -1,0 +1,16 @@
+{
+  "data_info": {
+    "total_samples": 42720,
+    "train_samples": 25632,
+    "val_samples": 8544,
+    "test_samples": 8544,
+    "sequence_length": 60
+  },
+  "final_metrics": {
+    "loss": 0.709281909690713,
+    "accuracy": 0.49249852333136446,
+    "precision": 0.4569964349376114,
+    "recall": 0.5245524296675191,
+    "f1_score": 0.48844963086449156,
+    "auc_score": 0.49785778254412527,
+    "prob_mean": 
