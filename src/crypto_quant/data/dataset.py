@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def build_dataset(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame, lookback: int = 60, horizon: int = 5):
+def build_dataset(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame, lookback: int = 60, horizon: int = 2):
     """
     Build dataset for GRU model training.
     
@@ -10,7 +10,7 @@ def build_dataset(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame, lookback: int =
         df_ohlcv: OHLCV data with 'close' column
         df_feat: Feature data aligned with df_ohlcv
         lookback: Number of past timesteps to use (default: 60)
-        horizon: Number of future timesteps for label (default: 5)
+        horizon: Number of future timesteps for label (default: 2, i.e., 10 minutes ahead)
         
     Returns:
         X: (N, lookback, num_features) array
@@ -21,20 +21,20 @@ def build_dataset(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame, lookback: int =
     high = df_ohlcv['high'] 
     low = df_ohlcv['low']
     
-    # New features
-    ret_1m = np.log(close / close.shift(1)).fillna(0)
-    ret_5m = np.log(close / close.shift(5)).fillna(0)
-    ret_15m = np.log(close / close.shift(15)).fillna(0)
-    vol_15m = close.rolling(15).std().fillna(close.std())
-    pos_1m = ((close - low) / (high - low)).fillna(0.5)
+    # New features (adjusted for 5-minute timeframe)
+    ret_5m = np.log(close / close.shift(1)).fillna(0)      # 1-period return (5m)
+    ret_25m = np.log(close / close.shift(5)).fillna(0)     # 5-period return (25m)
+    ret_1h = np.log(close / close.shift(12)).fillna(0)     # 12-period return (1h)
+    vol_1h = close.rolling(12).std().fillna(close.std())   # 1-hour volatility
+    pos_5m = ((close - low) / (high - low)).fillna(0.5)    # Price position
     
     # Combine original features with new ones
     enhanced_features = df_feat.copy()
-    enhanced_features['ret_1m'] = ret_1m
     enhanced_features['ret_5m'] = ret_5m
-    enhanced_features['ret_15m'] = ret_15m
-    enhanced_features['vol_15m'] = vol_15m
-    enhanced_features['pos_1m'] = pos_1m
+    enhanced_features['ret_25m'] = ret_25m
+    enhanced_features['ret_1h'] = ret_1h
+    enhanced_features['vol_1h'] = vol_1h
+    enhanced_features['pos_5m'] = pos_5m
     
     # Apply z-score normalization to stabilize training
     enhanced_features = (enhanced_features - enhanced_features.mean()) / (enhanced_features.std() + 1e-8)
@@ -65,10 +65,11 @@ def build_dataset(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame, lookback: int =
             future_return = np.log(df_ohlcv['close'].iloc[future_idx] / 
                                  df_ohlcv['close'].iloc[current_idx])
             
-            # Label based on future return - using adjusted thresholds ±0.0005 (±0.05%)
-            if future_return > 0.0005:  # +0.05%
+            # Label based on future return - using tighter thresholds for 5m timeframe
+            # With 5m bars and 2-period horizon (10 minutes), use smaller thresholds
+            if future_return > 0.0002:  # +0.02% (tighter threshold for 5m)
                 label = 2  # Up
-            elif future_return < -0.0005:  # -0.05%
+            elif future_return < -0.0002:  # -0.02%
                 label = 0  # Down
             else:
                 label = 1  # Hold

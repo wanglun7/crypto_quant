@@ -59,7 +59,7 @@ def calculate_sma(series: pd.Series, window: int) -> pd.Series:
     return series.rolling(window=window).mean()
 
 
-def calculate_ema_features(df: pd.DataFrame, fast: int = 12, slow: int = 26) -> pd.DataFrame:
+def calculate_ema_features(df: pd.DataFrame, fast: int = 5, slow: int = 10) -> pd.DataFrame:
     """Calculate EMA indicators."""
     result = pd.DataFrame(index=df.index)
     result['ema_fast'] = calculate_ema(df['close'], fast)
@@ -71,11 +71,11 @@ def calculate_macd(df: pd.DataFrame) -> pd.DataFrame:
     """Calculate MACD indicators."""
     result = pd.DataFrame(index=df.index)
     
-    # Calculate MACD manually
-    ema_fast = calculate_ema(df['close'], 12)
-    ema_slow = calculate_ema(df['close'], 26)
+    # Calculate MACD manually with shorter periods for 5m
+    ema_fast = calculate_ema(df['close'], 5)
+    ema_slow = calculate_ema(df['close'], 10)
     macd_line = ema_fast - ema_slow
-    macd_signal = calculate_ema(macd_line, 9)
+    macd_signal = calculate_ema(macd_line, 5)
     
     result['macd'] = macd_line
     result['macd_signal'] = macd_signal
@@ -83,7 +83,7 @@ def calculate_macd(df: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
-def calculate_rsi(df: pd.DataFrame, period: int = 14) -> pd.DataFrame:
+def calculate_rsi(df: pd.DataFrame, period: int = 7) -> pd.DataFrame:
     """Calculate RSI indicator manually."""
     result = pd.DataFrame(index=df.index)
     
@@ -106,7 +106,7 @@ def calculate_rsi(df: pd.DataFrame, period: int = 14) -> pd.DataFrame:
     return result
 
 
-def calculate_bollinger_bands(df: pd.DataFrame, period: int = 20, std: float = 2.0) -> pd.DataFrame:
+def calculate_bollinger_bands(df: pd.DataFrame, period: int = 10, std: float = 2.0) -> pd.DataFrame:
     """Calculate Bollinger Bands indicators."""
     result = pd.DataFrame(index=df.index)
     
@@ -121,7 +121,7 @@ def calculate_bollinger_bands(df: pd.DataFrame, period: int = 20, std: float = 2
     return result
 
 
-def calculate_adx(df: pd.DataFrame, period: int = 14) -> pd.DataFrame:
+def calculate_adx(df: pd.DataFrame, period: int = 7) -> pd.DataFrame:
     """Calculate ADX indicator."""
     result = pd.DataFrame(index=df.index)
     

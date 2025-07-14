@@ -7,32 +7,34 @@ from sklearn.metrics import balanced_accuracy_score
 import os
 
 
-class GruSignal(nn.Module):
-    def __init__(self, input_size, hidden_size=32, num_layers=3, num_classes=3, dropout=0.2):
-        super(GruSignal, self).__init__()
-        self.hidden_size = hidden_size
-        self.num_layers = num_layers
+class SimpleNN(nn.Module):
+    def __init__(self, input_size, hidden_size=256, num_classes=3, dropout=0.3):
+        super(SimpleNN, self).__init__()
         
-        # 3-layer GRU with dropout
-        self.gru = nn.GRU(input_size, hidden_size, num_layers, 
-                          batch_first=True, dropout=dropout)
+        # Flatten sequential input to use in feedforward network
+        self.flatten_size = input_size  # This will be lookback * features
         
-        # Final classification layer
-        self.fc = nn.Linear(hidden_size, num_classes)
+        # Multi-layer feedforward network
+        self.network = nn.Sequential(
+            nn.Linear(self.flatten_size, hidden_size),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size, hidden_size // 2),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size // 2, hidden_size // 4),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size // 4, num_classes)
+        )
         
     def forward(self, x):
         # x shape: (batch, seq_len, input_size)
-        # Initialize hidden state
-        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
+        # Flatten to (batch, seq_len * input_size)
+        x_flat = x.view(x.size(0), -1)
         
-        # GRU forward
-        out, _ = self.gru(x, h0)
-        
-        # Get last output
-        out = out[:, -1, :]
-        
-        # Final classification
-        out = self.fc(out)
+        # Forward pass
+        out = self.network(x_flat)
         return out
     
     def predict_proba(self, x, temperature=1.0):
@@ -46,9 +48,60 @@ class GruSignal(nn.Module):
         return proba
 
 
-def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
+class SimpleConvNet(nn.Module):
+    def __init__(self, input_size, seq_len, num_classes=3, dropout=0.3):
+        super(SimpleConvNet, self).__init__()
+        
+        # 1D Convolutional layers for time series
+        self.conv1 = nn.Conv1d(input_size, 64, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv1d(64, 128, kernel_size=3, padding=1)
+        self.conv3 = nn.Conv1d(128, 256, kernel_size=3, padding=1)
+        
+        self.pool = nn.MaxPool1d(2)
+        self.dropout = nn.Dropout(dropout)
+        
+        # Calculate the size after convolutions and pooling
+        conv_out_size = 256 * (seq_len // 8)  # 3 pooling layers: 60 -> 30 -> 15 -> 7
+        
+        # Fully connected layers
+        self.fc = nn.Sequential(
+            nn.Linear(conv_out_size, 128),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(128, num_classes)
+        )
+        
+    def forward(self, x):
+        # x shape: (batch, seq_len, input_size)
+        # Conv1d expects (batch, channels, seq_len)
+        x = x.transpose(1, 2)  # (batch, input_size, seq_len)
+        
+        # Convolutional layers
+        x = self.pool(torch.relu(self.conv1(x)))
+        x = self.pool(torch.relu(self.conv2(x)))
+        x = self.pool(torch.relu(self.conv3(x)))
+        
+        # Flatten
+        x = x.view(x.size(0), -1)
+        
+        # Fully connected
+        x = self.fc(x)
+        return x
+    
+    def predict_proba(self, x, temperature=1.0):
+        """Return probability distribution over classes with optional temperature scaling."""
+        self.eval()
+        with torch.no_grad():
+            logits = self.forward(x)
+            # Apply temperature scaling
+            scaled_logits = logits / temperature
+            proba = torch.softmax(scaled_logits, dim=1)
+        return proba
+
+
+def train_simple_nn(X, y, epochs=10, batch_size=64, lr=1e-3, model_type="feedforward"):
     """
-    Train GRU model on the dataset.
+    Train Simple Neural Network model on the dataset.
     
     Args:
         X: Feature array (N, lookback, num_features)
@@ -56,6 +109,7 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
         epochs: Number of training epochs (max 10)
         batch_size: Batch size for training
         lr: Learning rate
+        model_type: "feedforward" or "conv"
         
     Returns:
         dict with 'val_bacc', 'test_bacc', 'ckpt_path'
@@ -95,7 +149,7 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     for i, cls in enumerate(unique_classes):
         class_weights_full[cls] = class_weights[i]
     
-    print(f"\nClass weights for loss function:")
+    print(f"\\nClass weights for loss function:")
     for i in range(3):
         print(f"  Class {i}: {class_weights_full[i]:.3f}")
     
@@ -107,9 +161,15 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     train_dataset = TensorDataset(X_train_t, y_train_t)
     train_loader = DataLoader(train_dataset, batch_size=batch_size, sampler=sampler)
     
-    # Initialize model with smaller capacity for 5m data
-    input_size = X.shape[2]
-    model = GruSignal(input_size=input_size, hidden_size=64, num_layers=2, dropout=0.3)
+    # Initialize model
+    if model_type == "conv":
+        model = SimpleConvNet(input_size=X.shape[2], seq_len=X.shape[1], num_classes=3, dropout=0.3)
+        ckpt_name = "simple_conv_latest.pt"
+    else:
+        # Feedforward network
+        flattened_size = X.shape[1] * X.shape[2]  # lookback * features
+        model = SimpleNN(input_size=flattened_size, hidden_size=256, num_classes=3, dropout=0.3)
+        ckpt_name = "simple_nn_latest.pt"
     
     # Loss with class weights for better handling of imbalanced classes
     criterion = nn.CrossEntropyLoss(weight=torch.FloatTensor(class_weights_full))
@@ -119,7 +179,7 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     # Training loop with early stopping
     best_val_bacc = 0
     patience_counter = 0
-    patience = 3  # Reduced patience for smaller dataset
+    patience = 5  # Increased patience
     
     # Train for longer with more data
     max_epochs = max(epochs, 30)
@@ -153,10 +213,12 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
             # Save best model
             torch.save({
                 'model_state_dict': model.state_dict(),
-                'input_size': input_size,
+                'model_type': model_type,
+                'input_size': X.shape[2],
+                'seq_len': X.shape[1],
                 'X_mean': X_mean,
                 'X_std': X_std,
-            }, "latest.pt")
+            }, ckpt_name)
         else:
             patience_counter += 1
             
@@ -166,7 +228,7 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     
     # Final evaluation on test set
     # Load best model
-    checkpoint = torch.load("latest.pt", weights_only=False)
+    checkpoint = torch.load(ckpt_name, weights_only=False)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
     
@@ -178,17 +240,32 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     return {
         'val_bacc': best_val_bacc,
         'test_bacc': test_bacc,
-        'ckpt_path': "latest.pt"
+        'ckpt_path': ckpt_name
     }
 
 
-def load_gru(ckpt_path="latest.pt"):
-    """Load trained GRU model from checkpoint."""
+def load_simple_nn(ckpt_path="simple_nn_latest.pt"):
+    """Load trained Simple NN model from checkpoint."""
     checkpoint = torch.load(ckpt_path, weights_only=False)
-    input_size = checkpoint['input_size']
+    model_type = checkpoint.get('model_type', 'feedforward')
     
-    # Load with matching hidden size for 5m model
-    model = GruSignal(input_size=input_size, hidden_size=64, num_layers=2, dropout=0.3)
+    if model_type == "conv":
+        model = SimpleConvNet(
+            input_size=checkpoint['input_size'], 
+            seq_len=checkpoint['seq_len'],
+            num_classes=3, 
+            dropout=0.3
+        )
+    else:
+        # Feedforward network
+        flattened_size = checkpoint['seq_len'] * checkpoint['input_size']
+        model = SimpleNN(
+            input_size=flattened_size, 
+            hidden_size=256, 
+            num_classes=3, 
+            dropout=0.3
+        )
+    
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
     

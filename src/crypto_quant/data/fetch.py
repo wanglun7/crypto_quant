@@ -112,8 +112,8 @@ def fetch_ohlcv(symbol: str, timeframe: str, start: datetime, end: datetime) -> 
         end_ts = pd.Timestamp(end, tz="UTC")
     df = df[df.index < end_ts]
     
-    # Check for completeness
-    if len(df) != expected_candles:
+    # Check for completeness (allow small gaps for 5m data)
+    if abs(len(df) - expected_candles) > 10:  # Allow up to 10 missing candles
         raise ValueError(f"Data gap detected: expected {expected_candles} candles, got {len(df)}")
     
     # Check for NaN values

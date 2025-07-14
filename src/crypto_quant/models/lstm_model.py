@@ -7,15 +7,15 @@ from sklearn.metrics import balanced_accuracy_score
 import os
 
 
-class GruSignal(nn.Module):
+class LSTMSignal(nn.Module):
     def __init__(self, input_size, hidden_size=32, num_layers=3, num_classes=3, dropout=0.2):
-        super(GruSignal, self).__init__()
+        super(LSTMSignal, self).__init__()
         self.hidden_size = hidden_size
         self.num_layers = num_layers
         
-        # 3-layer GRU with dropout
-        self.gru = nn.GRU(input_size, hidden_size, num_layers, 
-                          batch_first=True, dropout=dropout)
+        # 3-layer LSTM with dropout
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, 
+                           batch_first=True, dropout=dropout)
         
         # Final classification layer
         self.fc = nn.Linear(hidden_size, num_classes)
@@ -24,9 +24,10 @@ class GruSignal(nn.Module):
         # x shape: (batch, seq_len, input_size)
         # Initialize hidden state
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
+        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
         
-        # GRU forward
-        out, _ = self.gru(x, h0)
+        # LSTM forward
+        out, _ = self.lstm(x, (h0, c0))
         
         # Get last output
         out = out[:, -1, :]
@@ -46,9 +47,9 @@ class GruSignal(nn.Module):
         return proba
 
 
-def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
+def train_lstm(X, y, epochs=10, batch_size=64, lr=5e-4):
     """
-    Train GRU model on the dataset.
+    Train LSTM model on the dataset.
     
     Args:
         X: Feature array (N, lookback, num_features)
@@ -95,7 +96,7 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     for i, cls in enumerate(unique_classes):
         class_weights_full[cls] = class_weights[i]
     
-    print(f"\nClass weights for loss function:")
+    print(f"\\nClass weights for loss function:")
     for i in range(3):
         print(f"  Class {i}: {class_weights_full[i]:.3f}")
     
@@ -107,9 +108,9 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     train_dataset = TensorDataset(X_train_t, y_train_t)
     train_loader = DataLoader(train_dataset, batch_size=batch_size, sampler=sampler)
     
-    # Initialize model with smaller capacity for 5m data
+    # Initialize model with similar capacity to GRU
     input_size = X.shape[2]
-    model = GruSignal(input_size=input_size, hidden_size=64, num_layers=2, dropout=0.3)
+    model = LSTMSignal(input_size=input_size, hidden_size=128, num_layers=3, dropout=0.2)
     
     # Loss with class weights for better handling of imbalanced classes
     criterion = nn.CrossEntropyLoss(weight=torch.FloatTensor(class_weights_full))
@@ -119,7 +120,7 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     # Training loop with early stopping
     best_val_bacc = 0
     patience_counter = 0
-    patience = 3  # Reduced patience for smaller dataset
+    patience = 5  # Increased patience
     
     # Train for longer with more data
     max_epochs = max(epochs, 30)
@@ -156,7 +157,7 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
                 'input_size': input_size,
                 'X_mean': X_mean,
                 'X_std': X_std,
-            }, "latest.pt")
+            }, "lstm_latest.pt")
         else:
             patience_counter += 1
             
@@ -166,7 +167,7 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     
     # Final evaluation on test set
     # Load best model
-    checkpoint = torch.load("latest.pt", weights_only=False)
+    checkpoint = torch.load("lstm_latest.pt", weights_only=False)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
     
@@ -178,17 +179,17 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     return {
         'val_bacc': best_val_bacc,
         'test_bacc': test_bacc,
-        'ckpt_path': "latest.pt"
+        'ckpt_path': "lstm_latest.pt"
     }
 
 
-def load_gru(ckpt_path="latest.pt"):
-    """Load trained GRU model from checkpoint."""
+def load_lstm(ckpt_path="lstm_latest.pt"):
+    """Load trained LSTM model from checkpoint."""
     checkpoint = torch.load(ckpt_path, weights_only=False)
     input_size = checkpoint['input_size']
     
-    # Load with matching hidden size for 5m model
-    model = GruSignal(input_size=input_size, hidden_size=64, num_layers=2, dropout=0.3)
+    # Load with matching hidden size
+    model = LSTMSignal(input_size=input_size, hidden_size=128, num_layers=3, dropout=0.2)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
     

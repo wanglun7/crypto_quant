@@ -26,7 +26,7 @@ def run_backtest(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame, ckpt_path="lates
     model = load_gru(ckpt_path)
     
     # Build dataset for prediction
-    X, y = build_dataset(df_ohlcv, df_feat, lookback=60, horizon=5)
+    X, y = build_dataset(df_ohlcv, df_feat, lookback=60, horizon=2)
     
     # Apply normalization if available
     if hasattr(model, 'X_mean') and model.X_mean is not None:
@@ -44,72 +44,56 @@ def run_backtest(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame, ckpt_path="lates
     p_hold = probas_np[:, 1]   # Class 1: Hold  
     p_up = probas_np[:, 2]     # Class 2: Up
     
-    # Generate position signals based on probability thresholds
-    positions = np.zeros(len(probas_np))
-    for i in range(len(positions)):
-        if p_up[i] >= 0.45:
-            positions[i] = 1.0  # Long
-        elif p_down[i] >= 0.45:
-            positions[i] = -1.0  # Short
-        else:
-            positions[i] = 0.0  # Hold
+    # Generate continuous position signals - Long Only Strategy
+    signal = p_up - p_down  # Calculate signal strength
+    # Only keep long signals, clip short signals to 0
+    continuous_pos = np.clip(signal, 0, None)  # Only long positions [0, 1]
+    # Apply confidence filter - only trade when signal > 0.3 (adjusted for 5m)
+    continuous_pos = np.where(continuous_pos < 0.3, 0, continuous_pos)
+    
+    # Debug info
+    valid_positions = np.count_nonzero(continuous_pos)
+    avg_abs_position = np.mean(np.abs(continuous_pos[continuous_pos != 0])) if valid_positions > 0 else 0
+    print(f"GRU strategy - Valid positions: {valid_positions}/{len(continuous_pos)}, Avg position: {avg_abs_position:.3f}")
     
     # Align positions with price data
-    # start_ix = lookback + horizon to avoid lookahead bias
     lookback = 60
-    horizon = 5
-    start_ix = lookback + horizon
+    horizon = 2
+    start_ix = 62  # lookback + horizon
     
-    # Create full position array aligned with df_ohlcv
-    full_positions = np.zeros(len(df_ohlcv))
-    end_ix = start_ix + len(positions)
+    # Create size array for vectorbt
+    size_array = np.zeros(len(df_ohlcv))
+    end_ix = start_ix + len(continuous_pos)
     if end_ix <= len(df_ohlcv):
-        full_positions[start_ix:end_ix] = positions
+        size_array[start_ix:end_ix] = continuous_pos
     else:
         # Truncate if needed
         available_length = len(df_ohlcv) - start_ix
-        full_positions[start_ix:] = positions[:available_length]
+        size_array[start_ix:] = continuous_pos[:available_length]
     
     close_prices = df_ohlcv['close']
     
-    # Convert positions to entry/exit signals
-    # Only trade when position changes (to minimize fees)
-    entries_long = np.zeros(len(full_positions), dtype=bool)
-    exits_long = np.zeros(len(full_positions), dtype=bool)
-    entries_short = np.zeros(len(full_positions), dtype=bool)
-    exits_short = np.zeros(len(full_positions), dtype=bool)
-    
-    current_pos = 0
-    for i in range(1, len(full_positions)):
-        new_pos = full_positions[i]
-        
-        if current_pos != new_pos:
-            # Position change
-            if current_pos == 1:  # Exit long
-                exits_long[i] = True
-            elif current_pos == -1:  # Exit short
-                exits_short[i] = True
-                
-            if new_pos == 1:  # Enter long
-                entries_long[i] = True
-            elif new_pos == -1:  # Enter short
-                entries_short[i] = True
-                
-            current_pos = new_pos
-    
-    # Run backtest with vectorbt
-    pf = vbt.Portfolio.from_signals(
+    # Run backtest with target percent mode
+    pf = vbt.Portfolio.from_orders(
         close_prices,
-        entries=entries_long,
-        exits=exits_long,
-        short_entries=entries_short,
-        short_exits=exits_short,
+        size=size_array,
+        size_type='targetpercent',
         fees=fee_taker,
-        freq='1min',
-        slippage=0.0002  # 2 bp slippage
+        freq='5min'
     )
     
-    total_return = pf.total_return()
+    # Calculate performance metrics with proper maker fee adjustment
+    # Deduct maker fee based on position changes (more accurate)
+    holdings_pct = pf.asset_value() / pf.value()
+    position_changes = holdings_pct.diff().fillna(0)
+    maker_cost_pct = np.abs(position_changes) * fee_maker
+    
+    # Apply maker cost to returns
+    returns = pf.returns()
+    adjusted_returns = returns - maker_cost_pct.values
+    
+    # Calculate metrics
+    total_return = pf.total_return() 
     sharpe = pf.sharpe_ratio(freq='D')
     max_dd = pf.max_drawdown()
     trade_count = len(pf.orders.records)
@@ -138,37 +122,44 @@ def run_baseline(df_ohlcv: pd.DataFrame, df_feat: pd.DataFrame,
     Returns:
         dict with performance stats
     """
-    required_columns = ['ema_fast_1m', 'ema_slow_1m']
+    required_columns = ['ema_fast_5m', 'ema_slow_5m']
     for col in required_columns:
         if col not in df_feat.columns:
             raise ValueError(f"Missing required column: {col}")
     
-    ema_fast = df_feat['ema_fast_1m']
-    ema_slow = df_feat['ema_slow_1m']
+    ema_fast = df_feat['ema_fast_5m']
+    ema_slow = df_feat['ema_slow_5m']
     
-    # Simple EMA crossover strategy - only trade on signal changes
-    long_signal = ema_fast > ema_slow
-    short_signal = ema_fast < ema_slow
+    # Generate continuous position signal based on EMA difference
+    ema_avg = (ema_fast + ema_slow) / 2
+    ema_diff = (ema_fast - ema_slow) / (ema_avg + 1e-8)  # Avoid division by zero
+    continuous_pos = np.tanh(ema_diff * 50)  # Increase multiplier to get stronger signals
     
-    # Generate entry/exit signals
-    entries_long = long_signal & ~long_signal.shift(1).fillna(False)
-    exits_long = ~long_signal & long_signal.shift(1).fillna(False)
-    entries_short = short_signal & ~short_signal.shift(1).fillna(False)
-    exits_short = ~short_signal & short_signal.shift(1).fillna(False)
+    # Apply smaller dead zone for baseline strategy
+    continuous_pos = np.where(np.abs(continuous_pos) < 0.05, 0, continuous_pos)
+    continuous_pos = np.clip(continuous_pos, -1, 1)
+    
+    # Debug info
+    valid_positions = np.count_nonzero(continuous_pos)
+    avg_abs_position = np.mean(np.abs(continuous_pos[continuous_pos != 0])) if valid_positions > 0 else 0
+    print(f"Baseline strategy - Valid positions: {valid_positions}/{len(continuous_pos)}, Avg position: {avg_abs_position:.3f}")
     
     close_prices = df_ohlcv['close']
     
-    # Run backtest with vectorbt
-    pf = vbt.Portfolio.from_signals(
+    # Run backtest with target percent mode (same as GRU)
+    pf = vbt.Portfolio.from_orders(
         close_prices,
-        entries=entries_long,
-        exits=exits_long,
-        short_entries=entries_short,
-        short_exits=exits_short,
+        size=continuous_pos,
+        size_type='targetpercent',
         fees=fee_taker,
-        freq='1min',
-        slippage=0.0002  # 2 bp slippage
+        freq='5min'
     )
+    
+    # Calculate performance metrics with maker fee adjustment
+    returns = pf.returns()
+    positions = pf.asset_value(group_by=False) / pf.value()
+    maker_cost = np.abs(positions.diff().fillna(0)) * fee_maker
+    adjusted_returns = returns - maker_cost.values.flatten()
     
     total_return = pf.total_return()
     sharpe = pf.sharpe_ratio(freq='D')
