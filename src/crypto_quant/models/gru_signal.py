@@ -88,8 +88,17 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     class_weights = 1.0 / counts  # Inverse frequency weighting
     class_weights = class_weights / class_weights.sum() * len(unique_classes)  # Normalize
     
+    # Ensure we have weights for all 3 classes
+    class_weights_full = np.ones(3)
+    for i, cls in enumerate(unique_classes):
+        class_weights_full[cls] = class_weights[i]
+    
+    print(f"\nClass weights for loss function:")
+    for i in range(3):
+        print(f"  Class {i}: {class_weights_full[i]:.3f}")
+    
     # Create sample weights for WeightedRandomSampler
-    sample_weights = np.array([class_weights[label] for label in y_train])
+    sample_weights = np.array([class_weights_full[label] for label in y_train])
     sampler = WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights))
     
     # Create data loaders
@@ -98,10 +107,10 @@ def train_gru(X, y, epochs=10, batch_size=64, lr=5e-4):
     
     # Initialize model with larger capacity
     input_size = X.shape[2]
-    model = GruSignal(input_size=input_size, hidden_size=64, num_layers=3, dropout=0.3)
+    model = GruSignal(input_size=input_size, hidden_size=128, num_layers=3, dropout=0.2)
     
-    # Loss and optimizer (no class weights in loss function)
-    criterion = nn.CrossEntropyLoss()
+    # Loss with class weights for better handling of imbalanced classes
+    criterion = nn.CrossEntropyLoss(weight=torch.FloatTensor(class_weights_full))
     optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', patience=2, factor=0.7)
     
